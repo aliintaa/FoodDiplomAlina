@@ -10,53 +10,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Блог о еде</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Основные стили */
+        /* Общие стили */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: #f8f8f8;
+            background: #f6f6f6;
         }
 
-        /* Грид для всего дашборда */
         .dashboard {
-            display: grid;
-            grid-template-columns: 250px 1fr 200px;
-            gap: 20px;
-            padding: 20px;
+            display: flex;
+            height: 100vh;
         }
 
-        /* Боковое меню */
+        /* Левое меню */
         .sidebar {
+            width: 250px;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        .sidebar h2 {
-            font-size: 22px;
-        }
+            .sidebar h2 {
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
 
-        .sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
+            .sidebar ul {
+                list-style: none;
+                padding: 0;
+            }
 
-        .sidebar ul li {
-            padding: 10px;
-            cursor: pointer;
-        }
+            .sidebar li {
+                padding: 10px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+            }
 
-        .sidebar ul .active {
-            font-weight: bold;
-        }
+                .sidebar li i {
+                    margin-right: 10px;
+                }
+
+            .sidebar .active {
+                background: #ffcc00;
+                border-radius: 5px;
+            }
 
         /* Основной контент */
         .content {
-            background: #fff;
+            flex: 1;
             padding: 20px;
-            border-radius: 10px;
         }
 
         header {
@@ -65,33 +71,62 @@
             align-items: center;
         }
 
-        input {
-            padding: 5px;
-            width: 200px;
+        .search-bar {
+            display: flex;
         }
+
+            .search-bar input {
+                padding: 8px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+
+            .search-bar button {
+                background: #ffcc00;
+                border: none;
+                padding: 8px;
+                cursor: pointer;
+            }
+
+        /* Баннер */
+        .banner {
+            background: #ffcc00;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+            .banner img {
+                width: 100px;
+            }
 
         /* Категории */
         .categories {
-            margin: 10px 0;
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .categories button {
-            padding: 5px 15px;
-            margin-right: 5px;
-            border: none;
-            background: #eee;
-            cursor: pointer;
-        }
+            .categories button {
+                background: #ddd;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
 
-        .categories .active {
-            background: orange;
-            color: #fff;
-        }
+            .categories .active {
+                background: #ffcc00;
+            }
 
         /* Посты */
-        .posts {
-            display: flex;
-            gap: 15px;
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .post {
@@ -99,46 +134,66 @@
             padding: 10px;
             border-radius: 10px;
             text-align: center;
+            position: relative;
         }
 
-        .post img {
-            width: 100px;
-            height: 100px;
-        }
+            .post img {
+                width: 100%;
+                border-radius: 10px;
+            }
 
-        .like-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-        }
+            .post .add-btn {
+                background: #ffcc00;
+                border: none;
+                padding: 10px;
+                cursor: pointer;
+                border-radius: 50%;
+                font-size: 20px;
+            }
 
-        .like-btn.liked {
-            color: red;
-        }
-
-        /* Боковая панель справа */
-        .profile {
+        /* Правая панель */
+        .right-panel {
+            width: 250px;
             background: #fff;
             padding: 20px;
-            border-radius: 10px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            text-align: center;
+        }
+
+            .user-info img {
+                width: 80px;
+                border-radius: 50%;
+            }
+
+   
+        .sidebar {
+            width: 100%;
+        }
+
+        .posts-grid {
+            grid-template-columns: 1fr;
+        }
+
         }
     </style>
 </head>
 <body>
 
     <div class="dashboard">
-        <!-- Боковое меню -->
+        <!-- Левое меню -->
         <aside class="sidebar">
             <h2>Блог о еде</h2>
             <nav>
                 <ul>
-                    <li class="active">🏙️ Места</li>
-                    <li>🚚 Доставка</li>
-                    <li>⭐ Сохранено</li>
-                    <li>💬 Сообщения</li>
-                    <li>📜 История публикаций</li>
-                    <li>⚙️ Настройки</li>
+                    <li class="active"><i class="fa-solid fa-location-dot"></i> Места</li>
+                    <li><i class="fa-solid fa-truck"></i> Доставка</li>
+                    <li><i class="fa-solid fa-bookmark"></i> Сохранено</li>
+                    <li><i class="fa-solid fa-envelope"></i> Сообщения</li>
+                    <li><i class="fa-solid fa-clock-rotate-left"></i> История публикаций</li>
+                    <li><i class="fa-solid fa-gear"></i> Настройки</li>
                 </ul>
             </nav>
         </aside>
@@ -147,73 +202,80 @@
         <main class="content">
             <header>
                 <h1>Hello, Patricia</h1>
-                <input type="text" placeholder="🔍 Поиск...">
+                <div class="search-bar">
+                    <input type="text" placeholder="Поиск...">
+                    <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
             </header>
 
-            <div class="promo">
-                <p>Хотите разместить рекламу на нашем сайте?</p>
-            </div>
+            <!-- Баннер -->
+            <section class="banner">
+                <div class="banner-content">
+                    <h2>Хотите разместить рекламу на нашем сайте?</h2>
+                    <p>пишите на email по сотрудничеству</p>
+                </div>
+                <img src="https://i.imgur.com/LHZL8Nq.png" alt="Реклама">
+            </section>
 
             <!-- Категории -->
-            <div class="categories">
+            <section class="categories">
                 <button class="active">Все</button>
                 <button>Тесты</button>
                 <button>Рецепты</button>
                 <button>Популярно</button>
                 <button>Сотрудничество</button>
-            </div>
+            </section>
 
             <!-- Популярные посты -->
-            <h2>Популярные посты</h2>
-            <div class="posts">
-                <div class="post">
-                    <img src="Images/food.png" alt="Fish Burger">
-                    <h3>Fish Burger</h3>
-                    <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
-                    <button class="like-btn">❤️</button>
+            <section class="popular-posts">
+                <h2>Популярные посты</h2>
+                <div class="posts-grid">
+                    <div class="post">
+                        <img src="https://i.imgur.com/Zz92Qtc.png" alt="Fish Burger">
+                        <h3>Fish Burger</h3>
+                        <p>НИК</p>
+                        <div class="stars">★★★★★</div>
+                        <button class="add-btn">+</button>
+                    </div>
+                    <div class="post popular">
+                        <img src="https://i.imgur.com/s0yNFHs.png" alt="Beef Burger">
+                        <span class="badge">Популярно</span>
+                        <h3>Beef Burger</h3>
+                        <p>НИК</p>
+                        <div class="stars">★★★★★</div>
+                        <button class="add-btn">+</button>
+                    </div>
+                    <div class="post">
+                        <img src="https://i.imgur.com/TBfwDQj.png" alt="Cheese Burger">
+                        <h3>Cheese Burger</h3>
+                        <p>НИК</p>
+                        <div class="stars">★★★★★</div>
+                        <button class="add-btn">+</button>
+                    </div>
                 </div>
-                <div class="post popular">
-                    <img src="Images/food.png" alt="Cheese Burger">
-                    <h3>Beef Burger</h3>
-                    <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
-                    <button class="like-btn">❤️</button>
-                </div>
-                <div class="post">
-                    <img src="Images/food.png" alt="Cheese Burger">
-                    <h3>Cheese Burger</h3>
-                    <p>⭐ ⭐ ⭐ ⭐ ⭐</p>
-                    <button class="like-btn">❤️</button>
-                </div>
-            </div>
+            </section>
         </main>
 
-        <!-- Боковая панель справа -->
-        <aside class="profile">
-            <h3>Ваш аккаунт</h3>
-            <p>👥 Подписчики: <b>12 000</b></p>
-            <p>📩 Подписки: <b>12 000</b></p>
+        <!-- Правая панель -->
+        <aside class="right-panel">
+            <div class="user-info">
+                <img src="https://i.imgur.com/RpzrMRy.png" alt="User">
+                <div class="account-info">
+                    <h3>Ваш аккаунт</h3>
+                    <div class="stats">
+                        <div>
+                            <span>Подписчики</span>
+                            <strong>12,000</strong>
+                        </div>
+                        <div>
+                            <span>Подписки</span>
+                            <strong>12,000</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </aside>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Лайки
-            const likeButtons = document.querySelectorAll(".like-btn");
-            likeButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    button.classList.toggle("liked");
-                });
-            });
-
-            // Смена активной категории
-            const categoryButtons = document.querySelectorAll(".categories button");
-            categoryButtons.forEach(button => {
-                button.addEventListener("click", () => {
-                    categoryButtons.forEach(btn => btn.classList.remove("active"));
-                    button.classList.add("active");
-                });
-            });
-        });
-    </script>
 </body>
 </html>
